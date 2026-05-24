@@ -23,17 +23,11 @@
 </head>
 <body class="bg-slate-50 overflow-hidden h-screen w-full flex flex-col text-slate-800">
 
-    <div id="loader" class="fixed inset-0 z-50 flex flex-col items-center justify-center bg-white transition-opacity duration-500">
-        <div class="w-12 h-12 border-4 border-slate-200 border-t-blue-600 rounded-full animate-spin"></div>
-        <div class="mt-4 text-2xl font-bold text-blue-600 tracking-wide" id="loading-text">กำลังโหลดข้อมูล 0%</div>
-    </div>
-
     <div class="flex-1 w-full relative z-0">
         <iframe 
             id="app-frame"
             src="https://script.google.com/macros/s/AKfycbwfM58YV4X7v2RPh5wq-Qz4DhnzAFdL7xY3fG4Fcsk9Nky5adgDYxcxeD5PvRadJ2xQ/exec" 
-            class="absolute inset-0 w-full h-full border-none"
-            onload="completeLoading()">
+            class="absolute inset-0 w-full h-full border-none">
         </iframe>
     </div>
 
@@ -45,30 +39,6 @@
     </button>
 
     <script>
-        let percent = 0;
-        const loadingText = document.getElementById('loading-text');
-        const loader = document.getElementById('loader');
-
-        // เอฟเฟกต์โหลด %
-        const progress = setInterval(() => {
-            if (percent < 90) {
-                percent += Math.floor(Math.random() * 15) + 1;
-                if (percent > 90) percent = 90;
-                loadingText.innerText = `กำลังโหลดข้อมูล ${percent}%`;
-            }
-        }, 150);
-
-        function completeLoading() {
-            clearInterval(progress);
-            loadingText.innerText = `กำลังโหลดข้อมูล 100%`;
-            setTimeout(() => {
-                loader.classList.add('opacity-0');
-                setTimeout(() => {
-                    loader.style.display = 'none';
-                }, 500);
-            }, 300);
-        }
-
         // --- ระบบ PWA ติดตั้งแอป ---
         let deferredPrompt;
         const installBtn = document.getElementById('install-btn');
